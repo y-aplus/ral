@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="GPLv3の自由を減らさず、再利用可能な改変の共有を促す Reinvention Avoidance Layer (RAL)。" />
+    <title>Reinvention Avoidance Layer (RAL)</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <script type="module" src="./main.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">本文へ移動</a>
+    <header class="site-header">
+      <a class="brand" href="#top" aria-label="Reinvention Avoidance Layer ホーム">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span>Reinvention Avoidance Layer</span>
+      </a>
+      <nav class="nav" aria-label="メインナビゲーション">
+        <a href="#idea">考え方</a>
+        <a href="#notice">Notice</a>
+        <a href="#cli">ral CLI</a>
+        <a href="#faq">FAQ</a>
+        <a class="nav-github" href="https://github.com/y-aplus/ral">GitHub</a>
+      </nav>
+      <button class="menu-button" type="button" aria-expanded="false" aria-controls="mobile-nav">
+        <span></span><span></span>
+        <span class="sr-only">メニューを開く</span>
+      </button>
+      <nav class="mobile-nav" id="mobile-nav" aria-label="モバイルナビゲーション" hidden>
+        <a href="#idea">考え方</a><a href="#notice">Notice</a><a href="#cli">ral CLI</a><a href="#faq">FAQ</a>
+      </nav>
+    </header>
+
+    <main id="main">
+      <section class="hero" id="top">
+        <div class="hero-copy">
+          <h1>同じものを、<br />もう一度<br />つくらないために。</h1>
+          <p>GPLv3の自由はそのまま。<br />改変を共有してほしいという要請を、<br />forkの先まで残す。</p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="https://github.com/y-aplus/ral">GitHubで見る</a>
+            <a class="button button-secondary" href="#cli"><code>ral publish</code> を使う</a>
+          </div>
+        </div>
+
+        <div class="hero-terminal" aria-label="非公開の改変を公開forkへ共有する流れ">
+          <div class="terminal-bar">
+            <span class="terminal-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+            <code>$ ral status</code>
+          </div>
+          <div class="terminal-body">
+            <div class="repo-row source-row">
+              <div><strong>upstream/original</strong><span>public · GPLv3</span></div>
+              <code>8f3c1a2&nbsp;&nbsp;main</code>
+            </div>
+            <div class="branch-path" aria-hidden="true"><span></span><b>fork / private modifications</b></div>
+            <div class="repo-row fork-row">
+              <div><strong>you/original</strong><span>private → <em>public</em></span></div>
+              <code>d41f7aa&nbsp;&nbsp;ral/20260829</code>
+            </div>
+            <div class="terminal-output">
+              <code><span>$</span> ral publish</code>
+              <code><i>✓</i> published to you/original</code>
+              <code><i>→</i> github.com/you/original/tree/ral/…</code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="idea section" id="idea">
+        <div class="section-line" aria-hidden="true"><span></span></div>
+        <header class="section-heading wide-heading">
+          <h2>義務にしない。<br />忘れさせない。</h2>
+          <p>公開しなくてもGPL上の権利は失いません。それでも、再発明を減らすために共有を強くお願いします。</p>
+        </header>
+
+        <div class="comparison">
+          <article>
+            <span class="comparison-number">01</span>
+            <h3>GPLv3が保証する自由</h3>
+            <p>使う、調べる、改変する。改変物を他者へ伝達しない限り、GPLv3はソース公開を要求しません。</p>
+          </article>
+          <div class="versus" aria-hidden="true">と</div>
+          <article>
+            <span class="comparison-number accent">02</span>
+            <h3>fork先まで残る要請</h3>
+            <p>役に立つ改変を、可能なら公開してほしい。Noticeを残すことで、このお願いを次の人へ手渡します。</p>
+          </article>
+        </div>
+        <p class="idea-conclusion">守るのは、公開しない自由。<span>残すのは、共有してほしいという意思。</span></p>
+      </section>
+
+      <section class="notice section" id="notice">
+        <div class="notice-header">
+          <div>
+            <p class="section-index">正式文</p>
+            <h2>REINVENTION_NOTICE</h2>
+          </div>
+          <button class="copy-button" type="button" data-copy-notice>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="11" height="12" rx="1"></rect><path d="M16 8V4H5v12h3"></path></svg>
+            <span>Copy</span>
+          </button>
+        </div>
+        <div class="notice-document">
+          <ol aria-hidden="true"></ol>
+          <pre id="notice-text">REINVENTION AVOIDANCE NOTICE
+
+This Program is licensed under the GNU General Public License version 3
+(GPLv3). GPLv3 does not require you to publish modifications that you do
+not convey.
+
+The following is a non-binding request, not a condition of the license:
+
+    If you make a modification that may be useful to others, including a
+    modification used only privately or within an organization, please
+    make its source code publicly available when reasonably possible.
+    Sharing useful modifications helps others avoid doing the same work
+    again.
+
+Whether or not you follow this request, your rights under GPLv3 are
+unchanged. No permission granted by GPLv3 is conditioned on publication
+under this request.
+
+Preservation of this notice is a separate requirement. As permitted by
+GPLv3 section 7(b), this document is a specified reasonable legal notice
+and must be preserved when material covered by it is conveyed. Preserving
+this notice does not make the request above binding.
+
+This notice is not a separate software license.</pre>
+        </div>
+        <div class="notice-notes">
+          <p><strong>非拘束</strong><span>共有しなくても、GPLv3上の権利は変わりません。</span></p>
+          <p><strong>保持対象</strong><span>NoticeだけをGPLv3 §7(b)の合理的な法的告知として残します。</span></p>
+          <p><strong>別ライセンスではない</strong><span>ソフトウェアの法的ライセンス本体はGPLv3です。</span></p>
+        </div>
+      </section>
+
+      <section class="precedents section" aria-labelledby="precedents-title">
+        <header class="section-heading">
+          <p class="section-index">設計判断</p>
+          <h2 id="precedents-title">強制する道もあった。<br />私たちは、要請を選んだ。</h2>
+        </header>
+        <div class="precedent-list">
+          <article>
+            <div><span>PortAudio</span><strong>非拘束的な要請</strong></div>
+            <p>ライセンス本文と区別し、改変を原開発者へ送ることと、その要請自体を同梱することを依頼。最も近い先例です。</p>
+            <a href="https://github.com/PortAudio/portaudio/blob/master/LICENSE.txt">一次資料を読む<span aria-hidden="true">↗</span></a>
+          </article>
+          <article>
+            <div><span>RPL 1.5</span><strong>Deploy時の公開義務</strong></div>
+            <p>一定のdeploymentに達した改変や必要コンポーネントを、公開可能な仕組みで提供することをライセンス条件にします。</p>
+            <a href="https://opensource.org/license/RPL-1.5">一次資料を読む<span aria-hidden="true">↗</span></a>
+          </article>
+          <article>
+            <div><span>APSL 2.0</span><strong>External Deployment</strong></div>
+            <p>Externally Deployした改変のソースを利用可能にする義務を設けています。GPLv3より公開トリガーが広い設計です。</p>
+            <a href="https://opensource.apple.com/apsl/">一次資料を読む<span aria-hidden="true">↗</span></a>
+          </article>
+        </div>
+        <aside class="legal-caveat">
+          <strong>設計上の境界</strong>
+          <p>RALは、RPLやAPSLのように公開範囲を法的義務として拡張しません。Noticeの保持と、共有のお願いを明確に分離します。</p>
+        </aside>
+      </section>
+
+      <section class="cli section" id="cli">
+        <div class="section-line long" aria-hidden="true"><span></span></div>
+        <header class="section-heading wide-heading cli-heading">
+          <div>
+            <p class="section-index">ral CLI</p>
+            <h2>公開まで、<br />ひとつのコマンド。</h2>
+          </div>
+          <p>保存先も、アカウントも、モデレーションもGitHubに任せる。ralは公開までの手順だけを短くします。</p>
+        </header>
+
+        <div class="cli-grid">
+          <div class="cli-terminal">
+            <div class="terminal-bar"><span class="terminal-dots" aria-hidden="true"><i></i><i></i><i></i></span><code>~/project</code></div>
+            <pre><span>$</span> <b>ral publish</b>
+
+→ Checking repository…      <i>OK</i>
+→ Reviewing local changes…  <i>OK</i>
+→ Finding your public fork… <i>OK</i>
+→ Pushing ral/20260829…      <i>OK</i>
+
+<strong>✓ Published.</strong>
+https://github.com/you/project/tree/ral/…
+
+No upstream pull request was created.</pre>
+          </div>
+          <div class="workflow" aria-label="ral publishの処理フロー">
+            <div class="workflow-main">
+              <article><span>01</span><h3>local changes</h3><p>変更を確認し、必要ならcommit</p></article>
+              <article><span>02</span><h3>your public fork</h3><p>自分のGitHub forkへpush</p></article>
+              <article><span>03</span><h3>shareable URL</h3><p>誰でも参照できるURLを表示</p></article>
+            </div>
+            <div class="workflow-optional">
+              <span>optional / MVP 2</span>
+              <div><code>ral pr</code><p>upstreamへの提案は、公開とは別の操作にする。</p></div>
+            </div>
+          </div>
+        </div>
+        <div class="approval-note">
+          <strong>AIエージェントが勝手に公開しない。</strong>
+          <p>公開は外部へのデータ送信です。`ral publish --yes` は、ユーザーが対象ファイルと公開先を確認し、明示的に承認したあとだけ使います。</p>
+        </div>
+      </section>
+
+      <section class="adopt section" id="adopt">
+        <header class="section-heading">
+          <p class="section-index">導入</p>
+          <h2>プロジェクトに、<br />三つのファイル。</h2>
+        </header>
+        <div class="adopt-grid">
+          <div class="file-tree" aria-label="導入するファイル">
+            <div class="tree-root">your-repo/</div>
+            <p><span>├─</span><code>LICENSE</code><small>GNU GPLv3全文</small></p>
+            <p><span>├─</span><code>REINVENTION_NOTICE</code><small>保持される短いNotice</small></p>
+            <p><span>└─</span><code>REINVENTION.md</code><small>背景と公開方法・任意</small></p>
+          </div>
+          <div class="install-copy">
+            <p>法的ライセンスはGPLv3のまま。短いNoticeを追加し、必要なら詳しい説明を添えます。</p>
+            <code class="install-command">npm install --global ./packages/ral</code>
+            <a class="button button-primary" href="#notice">Noticeを読む</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="faq section" id="faq">
+        <header class="section-heading">
+          <p class="section-index">FAQ</p>
+          <h2>よくある質問</h2>
+        </header>
+        <div class="faq-list">
+          <details>
+            <summary>これは新しいOSSライセンスですか？<span aria-hidden="true">＋</span></summary>
+            <p>いいえ。ソフトウェアのライセンス本体はGNU GPLv3です。RALは、非拘束的な共有の要請を伝えるNoticeと公開支援ツールの組み合わせです。</p>
+          </details>
+          <details>
+            <summary>私的改変を公開しないとGPL違反になりますか？<span aria-hidden="true">＋</span></summary>
+            <p>なりません。共有の要請はライセンス条件ではなく、従わなくてもGPLv3上の権利は変わりません。</p>
+          </details>
+          <details>
+            <summary>では、何が保持対象ですか？<span aria-hidden="true">＋</span></summary>
+            <p>`REINVENTION_NOTICE`自体です。GPLv3 §7(b)に基づく合理的な法的告知として保持し、要請がfork先の受領者にも届くようにします。</p>
+          </details>
+          <details>
+            <summary>ral publishはPull Requestを作りますか？<span aria-hidden="true">＋</span></summary>
+            <p>作りません。MVPでは、自分の公開forkへbranchをpushしてURLを返すだけです。upstreamへの提案は別の操作として扱います。</p>
+          </details>
+          <details>
+            <summary>機密情報を含む改変も公開すべきですか？<span aria-hidden="true">＋</span></summary>
+            <p>いいえ。要請は「合理的に可能な場合」に限ります。秘密鍵、個人情報、契約上の秘密、未修正の脆弱性などを公開してはいけません。</p>
+          </details>
+        </div>
+        <p class="disclaimer">このページは一般的な情報を提供するもので、個別の法的助言ではありません。</p>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div><span class="brand-mark" aria-hidden="true"></span><strong>Reinvention Avoidance Layer</strong></div>
+      <p>Freedom remains. The request travels.</p>
+      <nav aria-label="フッターナビゲーション"><a href="#notice">Notice</a><a href="#cli">ral CLI</a><a href="https://www.gnu.org/licenses/gpl-3.0.html">GPLv3</a><a href="https://github.com/y-aplus/ral">GitHub</a></nav>
+    </footer>
+  </body>
+</html>
