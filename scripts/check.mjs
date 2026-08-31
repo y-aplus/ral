@@ -1,6 +1,7 @@
 import { readFile } from "node:fs/promises";
 import { spawnSync } from "node:child_process";
 import process from "node:process";
+import { assertNoObviousSecrets } from "../packages/ral/src/cli.mjs";
 
 const checks = [
   ["node", ["--check", "packages/ral/src/cli.mjs"]],
@@ -29,4 +30,16 @@ if (help.status !== 0 || !help.stdout.includes("ral publish")) {
   process.exit(1);
 }
 
-console.log("Checks passed: JavaScript syntax, Notice sync, and ral CLI help.");
+let secretGuardBlocked = false;
+try {
+  assertNoObviousSecrets(["README.md", "config/credentials.pem"]);
+} catch (error) {
+  secretGuardBlocked = error instanceof Error && error.message.includes("credentials.pem");
+}
+if (!secretGuardBlocked) {
+  console.error("ral secret-bearing filename guard check failed.");
+  process.exit(1);
+}
+assertNoObviousSecrets(["README.md", "src/index.js"]);
+
+console.log("Checks passed: JavaScript syntax, Notice sync, ral CLI help, and secret filename guard.");

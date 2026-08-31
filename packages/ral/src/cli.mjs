@@ -1,7 +1,9 @@
 #!/usr/bin/env node
 
 import { spawnSync } from "node:child_process";
+import { resolve } from "node:path";
 import { createInterface } from "node:readline/promises";
+import { fileURLToPath } from "node:url";
 import process from "node:process";
 
 const VERSION = "0.1.0";
@@ -96,8 +98,8 @@ function parseStatusPaths(status) {
     });
 }
 
-function assertNoObviousSecrets(status) {
-  const sensitive = parseStatusPaths(status).filter((path) => {
+export function assertNoObviousSecrets(paths) {
+  const sensitive = [...new Set(paths)].filter((path) => {
     const normalized = path.replaceAll("\\", "/").toLowerCase();
     const name = normalized.split("/").at(-1);
     return (
@@ -110,7 +112,7 @@ function assertNoObviousSecrets(status) {
 
   if (sensitive.length > 0) {
     throw new RalError(
-      `Publication stopped because changed files may contain secrets:\n${sensitive
+      `Publication stopped because tracked or changed files may contain secrets:\n${sensitive
         .map((path) => `  - ${path}`)
         .join("\n")}\nReview or remove them before publishing.`
     );
@@ -181,7 +183,6 @@ async function prepareCommit(cwd, status, options) {
   if (!status) return;
   console.log("\nChanged files:\n");
   console.log(status);
-  assertNoObviousSecrets(status);
 
   if (options.dryRun) {
     console.log("\n[dry-run] These changes would need a commit before publication.");
@@ -258,6 +259,8 @@ async function publish(options) {
 
   const viewer = command("gh", ["api", "user", "--jq", ".login"], { cwd }).stdout;
   const status = command("git", ["status", "--short"], { cwd }).stdout;
+  const trackedPaths = command("git", ["ls-files"], { cwd }).stdout.split(/\r?\n/).filter(Boolean);
+  assertNoObviousSecrets([...trackedPaths, ...parseStatusPaths(status)]);
 
   console.log("Reinvention Avoidance Layer publication");
   console.log(`  source: ${source.nameWithOwner} (${source.name})`);
@@ -317,4 +320,6 @@ async function main() {
   }
 }
 
-await main();
+if (process.argv[1] && fileURLToPath(import.meta.url) === resolve(process.argv[1])) {
+  await main();
+}

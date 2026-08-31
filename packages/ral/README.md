@@ -24,4 +24,4 @@ ral --help
 ral --version
 ```
 
-When the worktree is dirty, `ral` shows every changed path before asking whether to create a commit. `--yes` accepts prompts and must only be used after reviewing the repository. Common secret-bearing filenames are blocked from automatic publication.
+When the worktree is dirty, `ral` shows every changed path before asking whether to create a commit. `--yes` accepts prompts and must only be used after reviewing the repository. Common secret-bearing filenames are blocked whether they are already tracked or only present in the working tree.
